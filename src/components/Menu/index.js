@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from '../../assets/images/logo.png'
-import ButtonLink from './ButtonLink';
+import Button from '../Button';
 import './Menu.css'
 
 function Menu() {
@@ -11,9 +11,9 @@ function Menu() {
         <img src={Logo} alt="TeedFlix" className="Logo" />
       </a>
 
-      <ButtonLink className="ButtonLink" href="/">
+      <Button as="a" className="Button" href="/">
         Novo vídeo
-      </ButtonLink>
+      </Button>
 
     </nav>
   );
