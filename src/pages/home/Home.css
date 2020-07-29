@@ -1,0 +1,5 @@
+.Home {
+  background: var(--black);
+  color: var(--white);
+  flex: 1;
+}
