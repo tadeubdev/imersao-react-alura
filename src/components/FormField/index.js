@@ -48,15 +48,19 @@ function FormField({
 FormField.defaultProps = {
   as: 'input',
   type: 'text',
+  value: '',
+  label: '',
+  onChange: () => {},
 };
 
 FormField.propTypes = {
-  as: PropTypes.string,
-  label: PropTypes.string.isRequired,
-  type: PropTypes.string,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  //
+  as: PropTypes.string,
+  type: PropTypes.string,
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 export default FormField;
