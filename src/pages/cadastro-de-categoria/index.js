@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../components/PageDefault';
 
@@ -11,7 +11,9 @@ function CadastroDeCategoria() {
     descricao: '',
     cor: '#00',
   };
+  const url = 'http://localhost:8080/categorias';
 
+  const [isLoading, setLoadingStatus] = useState(true);
   const [categorias, setCategorias] = useState([]);
   const [valores, setValores] = useState(valoresIniciais);
 
@@ -31,16 +33,28 @@ function CadastroDeCategoria() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (valores.nome) {
+    if (valores.titulo) {
       const payload = {
+        id: categorias.length + 1,
         cor: valores.cor,
-        nome: valores.nome,
+        titulo: valores.titulo,
         descricao: valores.descricao,
       };
       setCategorias([payload, ...categorias]);
       setValores(valoresIniciais);
     }
   }
+
+  useEffect(() => {
+    fetch(url)
+      .then(async (response) => {
+        const content = await response.json();
+        setCategorias([
+          ...content,
+        ]);
+      })
+      .then(() => setLoadingStatus(false));
+  }, []);
 
   return (
     <PageDefault>
@@ -50,10 +64,10 @@ function CadastroDeCategoria() {
       <form onSubmit={handleSubmit}>
 
         <FormField
-          label="Nome"
+          label="Título"
           type="text"
-          name="nome"
-          value={valores.nome}
+          name="titulo"
+          value={valores.titulo}
           onChange={handleChange}
         />
 
@@ -80,13 +94,17 @@ function CadastroDeCategoria() {
 
       <br />
 
+      {isLoading && (
+        <div>
+          loading
+        </div>
+      )}
+
       <ul>
         {categorias.map((categoria) => (
-          <li key={categoria.nome}>
-            {categoria.nome}
-            {' '}
-            -
-            {' '}
+          <li key={categoria.id}>
+            {categoria.titulo}
+            {' - '}
             {categoria.descricao}
             {' '}
             (
