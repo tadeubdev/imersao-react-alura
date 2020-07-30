@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import PageDefault from '../../components/PageDefault'
 
 import FormField from '../../components/FormField'
+import FormButton from '../../components/FormButton';
 
 function CadastroDeCategoria() {
 
@@ -76,9 +77,10 @@ function CadastroDeCategoria() {
           onChange={handleChange}
         ></FormField>
 
-        <button>
+        <FormButton
+        >
           Cadastrar
-        </button>
+        </FormButton>
       </form>
 
       <br />
