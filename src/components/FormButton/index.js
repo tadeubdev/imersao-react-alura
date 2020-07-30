@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ElementButton = styled.button`
   min-width: 200px;
@@ -16,7 +17,11 @@ function FormButton({ children }) {
     <ElementButton>
       {children}
     </ElementButton>
-  )
+  );
 }
+
+FormButton.propTypes = {
+  children: PropTypes.string.isRequired,
+};
 
 export default FormButton;

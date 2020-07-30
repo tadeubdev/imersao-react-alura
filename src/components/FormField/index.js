@@ -1,23 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
-import './FormField.css'
+import './FormField.css';
+import PropTypes from 'prop-types';
 
-const Element = styled.input`` 
+const Element = styled.input``;
 
-function FormField({ as, label, type, name, value, onChange }) {
+function handleClick(event) {
+  if (event.currentTarget.querySelector('input')) {
+    event.currentTarget.querySelector('input').focus();
+  }
+  if (event.currentTarget.querySelector('textarea')) {
+    event.currentTarget.querySelector('textarea').focus();
+  }
+}
+
+function FormField({
+  as, label, type, name, value, onChange,
+}) {
+  const fieldId = `id_${name}`;
+
   return (
     <div
+      role="button"
       className="ElementContainer"
-      onClick={(event) => {
-        if (event.currentTarget.querySelector('input')) {
-          event.currentTarget.querySelector('input').focus();
-        }
-        if (event.currentTarget.querySelector('textarea')) {
-          event.currentTarget.querySelector('textarea').focus();
-        }
-      }}
+      onClick={handleClick}
+      onKeyPress={handleClick}
+      tabIndex={0}
     >
-      <label>{label}:</label>
+      <label
+        htmlFor={fieldId}
+      >
+        {label}
+        :
+      </label>
 
       <Element
         as={as}
@@ -27,7 +42,16 @@ function FormField({ as, label, type, name, value, onChange }) {
         onChange={onChange}
       />
     </div>
-  )
+  );
 }
+
+FormField.propTypes = {
+  as: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.string.isRequired,
+};
 
 export default FormField;
