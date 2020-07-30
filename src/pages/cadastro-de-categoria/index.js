@@ -35,7 +35,7 @@ function CadastroDeCategoria() {
     event.preventDefault();
     if (valores.titulo) {
       const payload = {
-        id: categorias.length + 1,
+        id: categorias.length + 1 ,
         cor: valores.cor,
         titulo: valores.titulo,
         descricao: valores.descricao,

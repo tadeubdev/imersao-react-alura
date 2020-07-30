@@ -3,6 +3,7 @@
     {
       "id": 1,
       "titulo": "Front End",
+      "descricao": "Front End",
       "cor": "#6BD1FF",
       "link_extra": {
         "text": "Formação de Front End na Alura",
@@ -12,6 +13,7 @@
     {
       "id": 2,
       "titulo": "Back End",
+      "descricao": "Back End",
       "cor": "#415aed",
       "link_extra": {
         "text": "Formação de Back End na Alura",
