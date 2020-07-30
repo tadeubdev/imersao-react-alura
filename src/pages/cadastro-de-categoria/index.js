@@ -51,7 +51,6 @@ function CadastroDeCategoria() {
 
         <FormField
           label="Nome"
-          as="input"
           type="text"
           name="nome"
           value={valores.nome}
@@ -61,7 +60,6 @@ function CadastroDeCategoria() {
         <FormField
           label="Descrição"
           as="textarea"
-          type="text"
           name="descricao"
           value={valores.descricao}
           onChange={handleChange}
@@ -69,7 +67,6 @@ function CadastroDeCategoria() {
 
         <FormField
           label="Cor"
-          as="input"
           type="color"
           name="cor"
           value={valores.cor}
