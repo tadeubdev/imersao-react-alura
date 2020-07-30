@@ -11,7 +11,8 @@ function CadastroDeCategoria() {
     descricao: '',
     cor: '#00',
   };
-  const url = 'http://localhost:8080/categorias';
+  const base = window.location.href.includes('localhost') ? 'http://localhost:8080' : 'https://teedflix.herokuapp.com';
+  const url = `${base}/categorias`;
 
   const [isLoading, setLoadingStatus] = useState(true);
   const [categorias, setCategorias] = useState([]);
@@ -35,7 +36,7 @@ function CadastroDeCategoria() {
     event.preventDefault();
     if (valores.titulo) {
       const payload = {
-        id: categorias.length + 1 ,
+        id: categorias.length + 1,
         cor: valores.cor,
         titulo: valores.titulo,
         descricao: valores.descricao,
@@ -54,7 +55,7 @@ function CadastroDeCategoria() {
         ]);
       })
       .then(() => setLoadingStatus(false));
-  }, []);
+  }, [url]);
 
   return (
     <PageDefault>
