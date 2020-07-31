@@ -1,6 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import PageDefault from '../../components/PageDefault'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PageDefault from '../../components/PageDefault';
 
 function CadastroDeVideo() {
   return (
@@ -17,9 +17,9 @@ function CadastroDeVideo() {
       <Link to="/">
         Ir para home
       </Link>
-      
+
     </PageDefault>
-  )
+  );
 }
 
 export default CadastroDeVideo;
