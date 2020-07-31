@@ -2,22 +2,28 @@
   "categorias": [
     {
       "id": 1,
-      "titulo": "Front End",
-      "descricao": "Front End",
-      "cor": "#6BD1FF",
+      "titulo": "Código Fonte TV",
+      "cor": "#544486",
       "link_extra": {
-        "text": "Formação de Front End na Alura",
-        "url": "https://www.alura.com.br/cursos-online-front-end"
+        "text": "excelente conteúdo sobre programação",
+        "url": "https://www.codigofonte.com.br/"
       }
     },
     {
       "id": 2,
-      "titulo": "Back End",
-      "descricao": "Back End",
-      "cor": "#415aed",
+      "titulo": "Músicas",
+      "cor": "#f01b01",
       "link_extra": {
-        "text": "Formação de Back End na Alura",
-        "url": "https://www.alura.com.br/cursos-online-back-end"
+        "text": "para escutar enquanto programa"
+      }
+    },
+    {
+      "id": 3,
+      "titulo": "Variados",
+      "cor": "rgb(113, 89, 193)",
+      "link_extra": {
+        "text": "conheça este excelente canal",
+        "url": "https://rocketseat.com.br/"
       }
     }
   ],
@@ -25,14 +31,86 @@
     {
       "id": 1,
       "categoriaId": 1,
-      "titulo": "SEO com React",
-      "url": "https://www.youtube.com/watch?v=c8mVlakBESE"
+      "titulo": "DDD (Domain-Driven Design) // Dicionário do Programador",
+      "url": "https://www.youtube.com/watch?v=GE6asEjTFv8"
     },
     {
       "id": 2,
+      "categoriaId": 1,
+      "titulo": "O FUTURO dos DRONES em 2030 será INCRÍVEL! // #DecodeCDF2030",
+      "url": "https://www.youtube.com/watch?v=KLBaDUNHrAM"
+    },
+    {
+      "id": 3,
+      "categoriaId": 1,
+      "titulo": "SUCESSO PROFISSIONAL: Como Fazer Networking com Programadores em 2020? // Vlog #123",
+      "url": "https://www.youtube.com/watch?v=2GxpbfTLjKg"
+    },
+    {
+      "id": 4,
+      "categoriaId": 1,
+      "titulo": "Ambientes Back-End com Docker + VS Code // Mão no Código #3",
+      "url": "https://www.youtube.com/watch?v=97jWpWp4Pnc"
+    },
+    {
+      "id": 5,
+      "categoriaId": 1,
+      "titulo": "GITHUB // Dicionário do Programador",
+      "url": "https://www.youtube.com/watch?v=myQuetgSEsY"
+    },
+    {
+      "id": 6,
       "categoriaId": 2,
-      "titulo": "SEO com React",
-      "url": "https://www.youtube.com/watch?v=c8mVlakBESE"
+      "titulo": "Vintage Culture @ El Verano 2018",
+      "url": "https://www.youtube.com/watch?v=q0PTBCM04b8"
+    },
+    {
+      "id": 7,
+      "categoriaId": 2,
+      "titulo": "AS MELHORES DE 2018 - SET VINTAGE CULTURE, CHEMICAL SURF, KVSH & DUBDOGZ #SóTrackBoa",
+      "url": "https://www.youtube.com/watch?v=X3Q8_FBnzqY"
+    },
+    {
+      "id": 8,
+      "categoriaId": 2,
+      "titulo": "Liu - The Garden LIVE Set",
+      "url": "https://www.youtube.com/watch?v=3yQHBfc-qgU"
+    },
+    {
+      "id": 9,
+      "categoriaId": 2,
+      "titulo": "Miracle Music Radio • 24/7 Live Radio | Best Relax House, Chillout, Study, Running, Happy Music",
+      "url": "https://www.youtube.com/watch?v=VUeLyt39mQk"
+    },
+    {
+      "id": 10,
+      "categoriaId": 2,
+      "titulo": "Músicas Mais Tocadas em 2020 As Melhores Músicas ♫ Músicas Internacionais Pop 2020",
+      "url": "https://www.youtube.com/watch?v=xLbYzZ6_gOg"
+    },
+    {
+      "id": 11,
+      "categoriaId": 3,
+      "titulo": "Estou criando uma GUI de Redis com Electron | Code/Drops #36",
+      "url": "https://www.youtube.com/watch?v=Ln926XT33RM"
+    },
+    {
+      "id": 12,
+      "categoriaId": 3,
+      "titulo": "Twitter Responsivo com ReactJS | UI Clone",
+      "url": "https://www.youtube.com/watch?v=K-8z_4xvT3o"
+    },
+    {
+      "id": 13,
+      "categoriaId": 3,
+      "titulo": "Fazendo um player de vídeo com React #HipstersPontoDicas - @Dev Soutinho",
+      "url": "https://www.youtube.com/watch?v=ZaYvwn9nBD4"
+    },
+    {
+      "id": 14,
+      "categoriaId": 3,
+      "titulo": "Carreira Front-end - Alura Live #18",
+      "url": "https://www.youtube.com/watch?v=Hyv5dY38Ep0"
     }
   ]
 }
