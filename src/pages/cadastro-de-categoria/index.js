@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import PageDefault from '../../components/PageDefault';
 
 import FormField from '../../components/FormField';
 import FormButton from '../../components/FormButton';
 
 import './CadastroDeCategoria.css';
+import useForm from '../../hooks/userForm';
 
 function CadastroDeCategoria() {
   const valoresIniciais = {
@@ -13,26 +13,14 @@ function CadastroDeCategoria() {
     descricao: '',
     cor: '#00',
   };
+
+  const { handleChange, clearForm, valores } = useForm(valoresIniciais);
+
   const base = window.location.href.includes('localhost') ? 'http://localhost:8080' : 'https://teedflix.herokuapp.com';
   const url = `${base}/categorias`;
 
   const [isLoading, setLoadingStatus] = useState(true);
   const [categorias, setCategorias] = useState([]);
-  const [valores, setValores] = useState(valoresIniciais);
-
-  function handleChangeValue(key, value) {
-    setValores({
-      ...valores,
-      [key]: value,
-    });
-  }
-
-  function handleChange({ target }) {
-    handleChangeValue(
-      target.getAttribute('name'),
-      target.value,
-    );
-  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -44,7 +32,7 @@ function CadastroDeCategoria() {
         descricao: valores.descricao,
       };
       setCategorias([payload, ...categorias]);
-      setValores(valoresIniciais);
+      clearForm();
     }
   }
 
