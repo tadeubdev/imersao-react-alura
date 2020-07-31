@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PageDefault from '../../components/PageDefault';
+import URL_BASE from '../../config';
 
 import FormField from '../../components/FormField';
 import FormButton from '../../components/FormButton';
@@ -16,8 +17,7 @@ function CadastroDeCategoria() {
 
   const { handleChange, clearForm, valores } = useForm(valoresIniciais);
 
-  const base = window.location.href.includes('localhost') ? 'http://localhost:8080' : 'https://teedflix.herokuapp.com';
-  const url = `${base}/categorias`;
+  const url = `${URL_BASE}/categorias`;
 
   const [isLoading, setLoadingStatus] = useState(true);
   const [categorias, setCategorias] = useState([]);
