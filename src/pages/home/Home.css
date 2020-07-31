@@ -3,3 +3,10 @@
   color: var(--white);
   flex: 1;
 }
+
+.Home #loading {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
