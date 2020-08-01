@@ -65,7 +65,7 @@ function CadastroDeVideo() {
   }
 
   return (
-    <PageDefault>
+    <PageDefault className="CadastroDeVideo">
 
       {isLoading && <Loading />}
 
@@ -79,7 +79,7 @@ function CadastroDeVideo() {
         <div id="loaded">
           <h1>Cadastro de vídeo</h1>
 
-          <form onSubmit={handleSubmit}>
+          <form className="form" onSubmit={handleSubmit}>
 
             <FormField
               label="Título"
@@ -111,15 +111,15 @@ function CadastroDeVideo() {
             </FormButton>
           </form>
 
-          <br />
+          <div className="form-footer">
+            <Link to="/cadastro/categoria">
+              Cadastrar nova categoria
+            </Link>
 
-          <Link to="/cadastro/categoria">
-            Cadastrar nova categoria
-          </Link>
-
-          <Link to="/">
-            Ir para home
-          </Link>
+            <Link to="/">
+              Ir para home
+            </Link>
+          </div>
         </div>
       )}
 

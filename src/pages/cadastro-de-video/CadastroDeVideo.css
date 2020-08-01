@@ -1,3 +1,4 @@
+
 .CadastroDeVideo #loading {
   min-height: 400px;
   display: flex;
@@ -5,8 +6,21 @@
   justify-content: center;
 }
 
-.CadastroDeVideo form {
-  margin-bottom: 10px;
+.CadastroDeVideo .form {
+  margin-bottom: 20px;
+}
+
+.CadastroDeVideo .form-footer {
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.CadastroDeVideo .form-footer a {
+  text-decoration: none;
+}
+
+.CadastroDeVideo .form-footer a:nth-child(2n) {
+  float: right;
 }
 
 @media (min-width: 801px) {
@@ -16,7 +30,7 @@
   }
 
   .CadastroDeVideo #loaded {
-    padding: 10px 30px;
+    padding: 5px 30px 30px 30px;
     background: rgba(255,255,255,.1);
   }
 }
