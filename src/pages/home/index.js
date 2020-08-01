@@ -8,8 +8,6 @@ import Carousel from '../../components/Carousel';
 import Loading from '../../components/Loading';
 import FlashMessage from '../../components/FlashMessage';
 
-import './Home.css';
-
 function Home() {
   const [isLoading, setLoadingStatus] = useState(true);
   const [categorias, setCategorias] = useState([]);
