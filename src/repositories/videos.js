@@ -15,18 +15,17 @@ function getAll() {
 }
 
 function create({
-  id, categoriaId, titulo, url,
+  categoriaId, titulo, url,
 }) {
   const payload = {
-    id,
-    url,
-    titulo,
-    categoriaId,
+    categoriaId, titulo, url,
   };
+
   return fetch(`${URL_VIDEOS}`, {
-    method: 'post',
-    content: {
-      'Content-type': 'application/json',
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
   })
