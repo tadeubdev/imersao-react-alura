@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
 import categoriasRepository from '../../repositories/categorias';
 import useForm from '../../hooks/userForm';
@@ -18,8 +19,18 @@ function CadastroDeCategoria() {
     descricao: '',
     cor: '#00',
   };
+  const history = useHistory();
 
-  const { handleChange, clearForm, valores } = useForm(valoresIniciais);
+  const [message, setMessage] = useState('');
+  const MessageWrapper = styled.div`
+    padding: 10px;
+    background: #ffc2c2;
+    color: #792929;
+    font-size: 14px;
+    margin-bottom: 15px;
+  `;
+
+  const { handleChange, valores } = useForm(valoresIniciais);
 
   const [isLoading, setLoadingStatus] = useState(true);
   const [errorOnLoading, setErrorLoadingStatus] = useState();
@@ -34,16 +45,34 @@ function CadastroDeCategoria() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (valores.titulo) {
-      const payload = {
-        id: categorias.length + 1,
-        cor: valores.cor,
-        titulo: valores.titulo,
-        descricao: valores.descricao,
-      };
-      setCategorias([payload, ...categorias]);
-      clearForm();
+    setMessage('');
+
+    if (!valores.titulo || !valores.descricao) {
+      return setMessage('Preencha todos os campos!');
     }
+    const categoryFound = categorias.find((categoria) => categoria.titulo === valores.titulo);
+    if (categoryFound) {
+      return setMessage('Ops! Categoria já existe!');
+    }
+    const payload = {
+      cor: valores.cor,
+      titulo: valores.titulo,
+      descricao: valores.descricao,
+    };
+    return categoriasRepository.create(payload)
+      .then(() => {
+        localStorage.setItem('_flash', JSON.stringify({
+          type: 'success',
+          message: 'Categoria cadastrada com sucesso!',
+        }));
+      })
+      .catch((error) => {
+        localStorage.setItem('_flash', JSON.stringify({
+          type: 'error',
+          message: `Não foi possível criar a cateogira! ${error.message}`,
+        }));
+      })
+      .then(() => history.push('/'));
   }
 
   return (
@@ -85,6 +114,8 @@ function CadastroDeCategoria() {
             value={valores.cor}
             onChange={handleChange}
           />
+
+          {message.length > 0 && (<MessageWrapper>{message}</MessageWrapper>)}
 
           <FormButton>
             Cadastrar
