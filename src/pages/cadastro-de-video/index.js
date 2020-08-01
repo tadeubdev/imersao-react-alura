@@ -5,8 +5,8 @@ import categoriasRepository from '../../repositories/categorias';
 import videosRepository from '../../repositories/videos';
 
 import PageDefault from '../../components/PageDefault';
-import FormField from '../../components/FormField';
 import useForm from '../../hooks/userForm';
+import FormField from '../../components/FormField';
 import FormButton from '../../components/FormButton';
 import Loading from '../../components/Loading';
 
@@ -16,7 +16,7 @@ function CadastroDeVideo() {
   const valoresIniciais = {
     url: 'https://www.youtube.com/watch?v=36YnV9STBqc',
     titulo: 'Teste',
-    categoryId: 2,
+    categoria: 'Teste',
   };
 
   const { handleChange, valores } = useForm(valoresIniciais);
@@ -32,9 +32,7 @@ function CadastroDeVideo() {
       .then(async (content) => setCategorias([...content]))
       .catch((error) => setErrorLoadingStatus(error.message))
       .then(() => setLoadingStatus(false));
-  }, []);
 
-  useEffect(() => {
     videosRepository.getAll()
       .then(async (content) => setVideos([...content]))
       .catch((error) => setErrorLoadingStatus(error.message))
@@ -49,7 +47,7 @@ function CadastroDeVideo() {
         id: videos.length + 1,
         url: valores.url,
         titulo: valores.titulo,
-        categoryId: valores.categoryId,
+        categoriaId: valores.categoriaId,
       })
         .then(() => {
           localStorage.setItem('_flash', JSON.stringify({
@@ -92,13 +90,14 @@ function CadastroDeVideo() {
               onChange={handleChange}
             />
 
-            <select name="categorias" id="categorias" defaultValue={valores.categoryId}>
-              {categorias.map((categoria) => (
-                <option value={categoria.id} key={categoria.id}>
-                  {categoria.titulo}
-                </option>
-              ))}
-            </select>
+            <FormField
+              label="Categoria"
+              type="text"
+              name="categoria"
+              value={valores.categoria}
+              onChange={handleChange}
+              suggestions={categorias.map((categoria) => categoria.titulo)}
+            />
 
             <FormButton>
               Cadastrar
