@@ -25,6 +25,12 @@
         "text": "conheça este excelente canal",
         "url": "https://rocketseat.com.br/"
       }
+    },
+    {
+      "cor": "#00ffff",
+      "titulo": "Imersão React Alura",
+      "descricao": "Vamos criar um site utilizando React para você marcar e listar seus vídeos e filmes preferidos no YouTube. Mas de maneira incrível!",
+      "id": 4
     }
   ],
   "videos": [
@@ -123,6 +129,36 @@
       "titulo": "Dua Lipa, Coldplay, Martin Garrix & Kygo, The Chainsmokers Style - Feeling Me #63",
       "url": "https://www.youtube.com/watch?v=IITU6vo599E",
       "id": 16
+    },
+    {
+      "categoriaId": 4,
+      "titulo": "Aula 01: React Components e AluraFlix",
+      "url": "https://www.youtube.com/watch?v=DQ3A2PTpDBU",
+      "id": 18
+    },
+    {
+      "categoriaId": 4,
+      "titulo": "AULA 2: Roteamento e state",
+      "url": "https://www.youtube.com/watch?v=B2GNlpRWhcw",
+      "id": 19
+    },
+    {
+      "categoriaId": 4,
+      "titulo": "AULA 3: Formulários reutilizáveis e mais components",
+      "url": "https://www.youtube.com/watch?v=ybnbwXSUCrE",
+      "id": 20
+    },
+    {
+      "categoriaId": 4,
+      "titulo": "AULA 4: Ajax, validação e o back-end",
+      "url": "https://www.youtube.com/watch?v=LCOnvYqWf5g",
+      "id": 21
+    },
+    {
+      "categoriaId": 4,
+      "titulo": "AULA 5: Gerenciamento de videos com React e JavaScript",
+      "url": "https://www.youtube.com/watch?v=hhQ3RtvmfEg",
+      "id": 22
     }
   ]
 }
