@@ -5,40 +5,41 @@ import categoriasRepository from '../../repositories/categorias';
 import PageDefault from '../../components/PageDefault';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
+import Loading from '../../components/Loading';
+import FlashMessage from '../../components/FlashMessage';
 
 import './Home.css';
 
 function Home() {
+  const [isLoading, setLoadingStatus] = useState(true);
   const [categorias, setCategorias] = useState([]);
   const [errorOnLoading, setErrorLoadingStatus] = useState();
 
   useEffect(() => {
     categoriasRepository.getAllWithVideos()
       .then(async (content) => setCategorias([...content]))
-      .catch((error) => setErrorLoadingStatus(error.message));
+      .catch((error) => setErrorLoadingStatus(error.message))
+      .then(() => setLoadingStatus(false));
   }, []);
 
   return (
-    <PageDefault className="Home">
+    <PageDefault className="Home" noPadding>
 
-      {categorias.length === 0 && (
-        <div id="loading">
-          <div className="lds-ring">
-            <div />
-            <div />
-            <div />
-            <div />
-          </div>
-        </div>
+      {isLoading && (
+        <Loading />
       )}
 
-      {categorias.length > 0 && errorOnLoading && (
+      {!isLoading && errorOnLoading && (
         <div id="LoadingError">
           <h1>{errorOnLoading}</h1>
         </div>
       )}
 
-      {!errorOnLoading && categorias.map((categoria, index) => {
+      {!isLoading && !errorOnLoading && (
+        <FlashMessage />
+      )}
+
+      {!isLoading && !errorOnLoading && categorias.map((categoria, index) => {
         if (index === 0) {
           return (
             <div key={categoria.id}>
