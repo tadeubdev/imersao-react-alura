@@ -88,7 +88,7 @@ function FormField({
           value={value}
           onChange={onChange}
           hasValue={hasValue}
-          autoComplete={hasSuggestion ? 'off' : undefined}
+          autoComplete={hasSuggestion ? 'off' : 'on'}
           list={`suggestionFor_${fieldId}`}
         />
 
