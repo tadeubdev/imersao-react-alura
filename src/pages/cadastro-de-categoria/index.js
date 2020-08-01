@@ -12,6 +12,7 @@ import Loading from '../../components/Loading';
 
 import Form from '../../components/Form';
 import FormFooter from '../../components/FormFooter';
+import FormMessage from '../../components/FormMessage';
 
 function CadastroDeCategoria() {
   const valoresIniciais = {
@@ -21,17 +22,9 @@ function CadastroDeCategoria() {
   };
   const history = useHistory();
 
-  const [message, setMessage] = useState('');
-  const MessageWrapper = styled.div`
-    padding: 10px;
-    background: #ffc2c2;
-    color: #792929;
-    font-size: 14px;
-    margin-bottom: 15px;
-  `;
-
   const { handleChange, valores } = useForm(valoresIniciais);
 
+  const [message, setMessage] = useState('');
   const [isLoading, setLoadingStatus] = useState(true);
   const [errorOnLoading, setErrorLoadingStatus] = useState();
   const [categorias, setCategorias] = useState([]);
@@ -115,7 +108,7 @@ function CadastroDeCategoria() {
             onChange={handleChange}
           />
 
-          {message.length > 0 && (<MessageWrapper>{message}</MessageWrapper>)}
+          <FormMessage message={message} />
 
           <FormButton>
             Cadastrar

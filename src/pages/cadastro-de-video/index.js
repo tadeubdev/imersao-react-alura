@@ -12,6 +12,7 @@ import Loading from '../../components/Loading';
 
 import Form from '../../components/Form';
 import FormFooter from '../../components/FormFooter';
+import FormMessage from '../../components/FormMessage';
 
 function CadastroDeVideo() {
   const valoresIniciais = {
@@ -23,6 +24,7 @@ function CadastroDeVideo() {
   const { handleChange, valores } = useForm(valoresIniciais);
   const history = useHistory();
 
+  const [message, setMessage] = useState('');
   const [isLoading, setLoadingStatus] = useState(true);
   const [errorOnLoading, setErrorLoadingStatus] = useState();
   const [categorias, setCategorias] = useState([]);
@@ -39,32 +41,40 @@ function CadastroDeVideo() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setMessage('');
 
-    if (valores.titulo && valores.url && valores.categoria) {
-      const categoriaSelecionada = categorias.find((categoria) => {
-        return categoria.titulo === valores.categoria;
-      });
-      if (!categoriaSelecionada) return;
-      const categoriaId = categoriaSelecionada.id;
-      videosRepository.create({
-        url: valores.url,
-        titulo: valores.titulo,
-        categoriaId,
-      })
-        .then(() => {
-          localStorage.setItem('_flash', JSON.stringify({
-            type: 'success',
-            message: 'Vídeo cadastrado com sucesso!',
-          }));
-        })
-        .catch((error) => {
-          localStorage.setItem('_flash', JSON.stringify({
-            type: 'error',
-            message: error.message,
-          }));
-        })
-        .then(() => history.push('/'));
+    if (!valores.titulo || !valores.url || !valores.categoria) {
+      return setMessage('Preencha todos os campos!');
     }
+
+    const categoriaSelecionada = categorias.find(({ titulo }) => titulo === valores.categoria);
+
+    if (!categoriaSelecionada) {
+      return setMessage(
+        `Ops! A categoria <strong>${valores.categoria}</strong> não existe! Você pode cadastrar clicando no botão abaixo!`,
+      );
+    }
+
+    const categoriaId = categoriaSelecionada.id;
+
+    return videosRepository.create({
+      url: valores.url,
+      titulo: valores.titulo,
+      categoriaId,
+    })
+      .then(() => {
+        localStorage.setItem('_flash', JSON.stringify({
+          type: 'success',
+          message: 'Vídeo cadastrado com sucesso!',
+        }));
+      })
+      .catch((error) => {
+        localStorage.setItem('_flash', JSON.stringify({
+          type: 'error',
+          message: error.message,
+        }));
+      })
+      .then(() => history.push('/'));
   }
 
   return (
@@ -107,6 +117,8 @@ function CadastroDeVideo() {
             onChange={handleChange}
             suggestions={categoryTitles}
           />
+
+          <FormMessage message={message} />
 
           <FormButton>
             Cadastrar
