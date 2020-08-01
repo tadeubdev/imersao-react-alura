@@ -15,13 +15,13 @@ function getAll() {
 }
 
 function create({
-  id, categoryId, titulo, url,
+  id, categoriaId, titulo, url,
 }) {
   const payload = {
     id,
-    titulo,
     url,
-    category_id: categoryId,
+    titulo,
+    categoriaId,
   };
   return fetch(`${URL_VIDEOS}`, {
     method: 'post',
