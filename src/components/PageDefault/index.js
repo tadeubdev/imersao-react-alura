@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Menu from '../Menu';
@@ -10,15 +10,18 @@ const Main = styled.main`
   background: var(--black);
   color: var(--white);
   flex: 1;
+  ${({ noPadding }) => noPadding && css`
+    padding: 0 !important;
+  `}
 `;
 
-function PageDefault({ className, children }) {
+function PageDefault({ className, children, noPadding }) {
   return (
     <>
 
       <Menu />
 
-      <Main>
+      <Main noPadding={noPadding}>
         <div className={className}>
           {children}
         </div>
@@ -32,10 +35,12 @@ function PageDefault({ className, children }) {
 
 PageDefault.defaultProps = {
   className: '',
+  noPadding: '',
 };
 
 PageDefault.propTypes = {
   className: PropTypes.string,
+  noPadding: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 
