@@ -38,23 +38,31 @@ function Home() {
         </div>
       )}
 
-      {categorias.length > 0 && !errorOnLoading && (
-        <div>
-          <BannerMain
-            videoTitle={categorias[0].videos[0].titulo}
-            url={categorias[0].videos[0].url}
-            videoDescription="Alguns links para programadores"
-          />
+      {!errorOnLoading && categorias.map((categoria, index) => {
+        if (index === 0) {
+          return (
+            <div key={categoria.id}>
+              <BannerMain
+                videoTitle={categorias[0].videos[0].titulo}
+                url={categorias[0].videos[0].url}
+                videoDescription="Alguns links para programadores"
+              />
 
-          {categorias.map((categoria, index) => (
-            <Carousel
-              key={categoria.id}
-              ignoreFirstVideo={index === 0}
-              category={categoria}
-            />
-          ))}
-        </div>
-      )}
+              <Carousel
+                ignoreFirstVideo
+                category={categoria}
+              />
+            </div>
+          );
+        }
+
+        return (
+          <Carousel
+            key={categoria.id}
+            category={categoria}
+          />
+        );
+      })}
 
     </PageDefault>
   );
