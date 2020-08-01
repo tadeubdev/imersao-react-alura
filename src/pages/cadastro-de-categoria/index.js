@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import categoriasRepository from '../../repositories/categorias';
 import useForm from '../../hooks/userForm';
@@ -8,7 +9,8 @@ import FormField from '../../components/FormField';
 import FormButton from '../../components/FormButton';
 import Loading from '../../components/Loading';
 
-import './CadastroDeCategoria.css';
+import Form from '../../components/Form';
+import FormFooter from '../../components/FormFooter';
 
 function CadastroDeCategoria() {
   const valoresIniciais = {
@@ -56,54 +58,48 @@ function CadastroDeCategoria() {
       )}
 
       {!isLoading && !errorOnLoading && (
-        <div id="loaded">
+        <Form onSubmit={handleSubmit}>
+
           <h1>Cadastro de categorias</h1>
 
-          <form onSubmit={handleSubmit}>
+          <FormField
+            label="Título"
+            type="text"
+            name="titulo"
+            value={valores.titulo}
+            onChange={handleChange}
+          />
 
-            <FormField
-              label="Título"
-              type="text"
-              name="titulo"
-              value={valores.titulo}
-              onChange={handleChange}
-            />
+          <FormField
+            label="Descrição"
+            as="textarea"
+            name="descricao"
+            value={valores.descricao}
+            onChange={handleChange}
+          />
 
-            <FormField
-              label="Descrição"
-              as="textarea"
-              name="descricao"
-              value={valores.descricao}
-              onChange={handleChange}
-            />
+          <FormField
+            label="Cor"
+            type="color"
+            name="cor"
+            value={valores.cor}
+            onChange={handleChange}
+          />
 
-            <FormField
-              label="Cor"
-              type="color"
-              name="cor"
-              value={valores.cor}
-              onChange={handleChange}
-            />
+          <FormButton>
+            Cadastrar
+          </FormButton>
 
-            <FormButton>
-              Cadastrar
-            </FormButton>
-          </form>
+          <FormFooter>
+            <Link to="/cadastro/video">
+              Cadastrar novo vídeo
+            </Link>
 
-          <ul>
-            {categorias.map((categoria) => (
-              <li key={categoria.id}>
-                {categoria.titulo}
-                {' - '}
-                {categoria.descricao}
-                {' '}
-                (
-                {categoria.cor}
-                )
-              </li>
-            ))}
-          </ul>
-        </div>
+            <Link to="/">
+              Ir para home
+            </Link>
+          </FormFooter>
+        </Form>
       )}
 
     </PageDefault>

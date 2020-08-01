@@ -10,7 +10,8 @@ import FormField from '../../components/FormField';
 import FormButton from '../../components/FormButton';
 import Loading from '../../components/Loading';
 
-import './CadastroDeVideo.css';
+import Form from '../../components/Form';
+import FormFooter from '../../components/FormFooter';
 
 function CadastroDeVideo() {
   const valoresIniciais = {
@@ -31,7 +32,9 @@ function CadastroDeVideo() {
     categoriasRepository.getAll()
       .then(async (content) => setCategorias([...content]))
       .catch((error) => setErrorLoadingStatus(error.message))
-      .then(() => setLoadingStatus(false));
+      .then(() => {
+        setTimeout(() => setLoadingStatus(false), 200);
+      });
   }, []);
 
   function handleSubmit(event) {
@@ -65,7 +68,7 @@ function CadastroDeVideo() {
   }
 
   return (
-    <PageDefault className="CadastroDeVideo">
+    <PageDefault>
 
       {isLoading && <Loading />}
 
@@ -76,42 +79,40 @@ function CadastroDeVideo() {
       )}
 
       {!isLoading && !errorOnLoading && (
-        <div id="loaded">
+        <Form onSubmit={handleSubmit}>
+
           <h1>Cadastro de vídeo</h1>
 
-          <form className="form" onSubmit={handleSubmit}>
+          <FormField
+            label="Título"
+            type="text"
+            name="titulo"
+            value={valores.titulo}
+            onChange={handleChange}
+          />
 
-            <FormField
-              label="Título"
-              type="text"
-              name="titulo"
-              value={valores.titulo}
-              onChange={handleChange}
-            />
+          <FormField
+            label="Link do Vídeo"
+            type="url"
+            name="url"
+            value={valores.url}
+            onChange={handleChange}
+          />
 
-            <FormField
-              label="Link do Vídeo"
-              type="url"
-              name="url"
-              value={valores.url}
-              onChange={handleChange}
-            />
+          <FormField
+            label="Categoria"
+            type="text"
+            name="categoria"
+            value={valores.categoria}
+            onChange={handleChange}
+            suggestions={categoryTitles}
+          />
 
-            <FormField
-              label="Categoria"
-              type="text"
-              name="categoria"
-              value={valores.categoria}
-              onChange={handleChange}
-              suggestions={categoryTitles}
-            />
+          <FormButton>
+            Cadastrar
+          </FormButton>
 
-            <FormButton>
-              Cadastrar
-            </FormButton>
-          </form>
-
-          <div className="form-footer">
+          <FormFooter>
             <Link to="/cadastro/categoria">
               Cadastrar nova categoria
             </Link>
@@ -119,8 +120,8 @@ function CadastroDeVideo() {
             <Link to="/">
               Ir para home
             </Link>
-          </div>
-        </div>
+          </FormFooter>
+        </Form>
       )}
 
     </PageDefault>
