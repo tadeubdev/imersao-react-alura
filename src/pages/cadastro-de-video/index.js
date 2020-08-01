@@ -60,7 +60,7 @@ function CadastroDeVideo() {
         .catch((error) => {
           localStorage.setItem('_flash', JSON.stringify({
             type: 'error',
-            message: `Não foi possível salvar o vídeo ${error.message}`,
+            message: error.message,
           }));
         })
         .then(() => history.push('/'));

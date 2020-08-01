@@ -69,7 +69,7 @@ function CadastroDeCategoria() {
       .catch((error) => {
         localStorage.setItem('_flash', JSON.stringify({
           type: 'error',
-          message: `Não foi possível criar a cateogira! ${error.message}`,
+          message: error.message,
         }));
       })
       .then(() => history.push('/'));
