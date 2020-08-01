@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import categoriasRepository from '../../repositories/categorias';
 
+import PageDefault from '../../components/PageDefault';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
 import Menu from '../../components/Menu';
@@ -10,24 +11,19 @@ import Footer from '../../components/Footer';
 import './Home.css';
 
 function Home() {
-  const [isLoading, setLoadingStatus] = useState(true);
-  const [errorOnLoading, setErrorLoadingStatus] = useState();
   const [categorias, setCategorias] = useState([]);
+  const [errorOnLoading, setErrorLoadingStatus] = useState();
 
   useEffect(() => {
     categoriasRepository.getAllWithVideos()
-      .then(async (content) => {
-        setCategorias([...content]);
-      })
-      .catch((error) => setErrorLoadingStatus(error.message))
-      .then(() => setLoadingStatus(false));
+      .then(async (content) => setCategorias([...content]))
+      .catch((error) => setErrorLoadingStatus(error.message));
   }, []);
 
   return (
-    <div className="Home">
-      <Menu />
+    <PageDefault className="Home">
 
-      {isLoading && (
+      {categorias.length === 0 && (
         <div id="loading">
           <div className="lds-ring">
             <div />
@@ -38,13 +34,13 @@ function Home() {
         </div>
       )}
 
-      {isLoading === false && errorOnLoading && (
+      {categorias.length > 0 && errorOnLoading && (
         <div id="LoadingError">
           <h1>{errorOnLoading}</h1>
         </div>
       )}
 
-      {isLoading === false && !errorOnLoading && (
+      {categorias.length > 0 && !errorOnLoading && (
         <div>
           <BannerMain
             videoTitle={categorias[0].videos[0].titulo}
@@ -62,9 +58,7 @@ function Home() {
         </div>
       )}
 
-      <Footer />
-
-    </div>
+    </PageDefault>
   );
 }
 
