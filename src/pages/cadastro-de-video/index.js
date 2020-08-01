@@ -14,9 +14,9 @@ import './CadastroDeVideo.css';
 
 function CadastroDeVideo() {
   const valoresIniciais = {
-    url: 'https://www.youtube.com/watch?v=36YnV9STBqc',
-    titulo: 'Teste',
-    categoria: 'Teste',
+    url: '',
+    titulo: '',
+    categoria: '',
   };
 
   const { handleChange, valores } = useForm(valoresIniciais);
@@ -25,16 +25,11 @@ function CadastroDeVideo() {
   const [isLoading, setLoadingStatus] = useState(true);
   const [errorOnLoading, setErrorLoadingStatus] = useState();
   const [categorias, setCategorias] = useState([]);
-  const [videos, setVideos] = useState([]);
+  const categoryTitles = categorias.map((categoria) => categoria.titulo);
 
   useEffect(() => {
     categoriasRepository.getAll()
       .then(async (content) => setCategorias([...content]))
-      .catch((error) => setErrorLoadingStatus(error.message))
-      .then(() => setLoadingStatus(false));
-
-    videosRepository.getAll()
-      .then(async (content) => setVideos([...content]))
       .catch((error) => setErrorLoadingStatus(error.message))
       .then(() => setLoadingStatus(false));
   }, []);
@@ -42,12 +37,16 @@ function CadastroDeVideo() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (valores.titulo) {
+    if (valores.titulo && valores.url && valores.categoria) {
+      const categoriaSelecionada = categorias.find((categoria) => {
+        return categoria.titulo === valores.categoria;
+      });
+      if (!categoriaSelecionada) return;
+      const categoriaId = categoriaSelecionada.id;
       videosRepository.create({
-        id: videos.length + 1,
         url: valores.url,
         titulo: valores.titulo,
-        categoriaId: valores.categoriaId,
+        categoriaId,
       })
         .then(() => {
           localStorage.setItem('_flash', JSON.stringify({
@@ -91,12 +90,20 @@ function CadastroDeVideo() {
             />
 
             <FormField
+              label="Link do Vídeo"
+              type="url"
+              name="url"
+              value={valores.url}
+              onChange={handleChange}
+            />
+
+            <FormField
               label="Categoria"
               type="text"
               name="categoria"
               value={valores.categoria}
               onChange={handleChange}
-              suggestions={categorias.map((categoria) => categoria.titulo)}
+              suggestions={categoryTitles}
             />
 
             <FormButton>
