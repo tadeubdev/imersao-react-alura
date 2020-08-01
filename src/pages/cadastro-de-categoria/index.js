@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import PageDefault from '../../components/PageDefault';
-import config from '../../config';
 
+import categoriasRepository from '../../repositories/categorias';
+import useForm from '../../hooks/userForm';
+
+import PageDefault from '../../components/PageDefault';
 import FormField from '../../components/FormField';
 import FormButton from '../../components/FormButton';
+import Loading from '../../components/Loading';
 
 import './CadastroDeCategoria.css';
-import useForm from '../../hooks/userForm';
 
 function CadastroDeCategoria() {
   const valoresIniciais = {
@@ -17,10 +19,16 @@ function CadastroDeCategoria() {
 
   const { handleChange, clearForm, valores } = useForm(valoresIniciais);
 
-  const url = `${config.URL_BASE}/categorias`;
-
   const [isLoading, setLoadingStatus] = useState(true);
+  const [errorOnLoading, setErrorLoadingStatus] = useState();
   const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    categoriasRepository.getAll()
+      .then(async (content) => setCategorias([...content]))
+      .catch((error) => setErrorLoadingStatus(error.message))
+      .then(() => setLoadingStatus(false));
+  }, []);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -36,34 +44,20 @@ function CadastroDeCategoria() {
     }
   }
 
-  useEffect(() => {
-    fetch(url)
-      .then(async (response) => {
-        const content = await response.json();
-        setCategorias([
-          ...content,
-        ]);
-      })
-      .then(() => setLoadingStatus(false));
-  }, [url]);
-
   return (
     <PageDefault className="CadastroDeCategoria">
 
-      {isLoading && (
-        <div id="loading">
-          <div className="lds-ring">
-            <div />
-            <div />
-            <div />
-            <div />
-          </div>
+      {isLoading && <Loading />}
+
+      {!isLoading && errorOnLoading && (
+        <div id="LoadingError">
+          <h1>{errorOnLoading}</h1>
         </div>
       )}
 
-      {isLoading === false && (
+      {!isLoading && !errorOnLoading && (
         <div id="loaded">
-          <h1>Cadastro de categoria</h1>
+          <h1>Cadastro de categorias</h1>
 
           <form onSubmit={handleSubmit}>
 
