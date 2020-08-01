@@ -35,12 +35,12 @@ function PageDefault({ className, children, noPadding }) {
 
 PageDefault.defaultProps = {
   className: '',
-  noPadding: '',
+  noPadding: false,
 };
 
 PageDefault.propTypes = {
   className: PropTypes.string,
-  noPadding: PropTypes.string,
+  noPadding: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 
