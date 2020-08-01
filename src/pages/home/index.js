@@ -11,6 +11,7 @@ import './Home.css';
 
 function Home() {
   const [isLoading, setLoadingStatus] = useState(true);
+  const [errorOnLoading, setErrorLoadingStatus] = useState();
   const [categorias, setCategorias] = useState([]);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function Home() {
       .then(async (content) => {
         setCategorias([...content]);
       })
-      .catch((error) => console.log(error))
+      .catch((error) => setErrorLoadingStatus(error.message))
       .then(() => setLoadingStatus(false));
   }, []);
 
@@ -37,7 +38,13 @@ function Home() {
         </div>
       )}
 
-      {isLoading === false && (
+      {isLoading === false && errorOnLoading && (
+        <div id="LoadingError">
+          <h1>{errorOnLoading}</h1>
+        </div>
+      )}
+
+      {isLoading === false && !errorOnLoading && (
         <div>
           <BannerMain
             videoTitle={categorias[0].videos[0].titulo}

@@ -10,3 +10,10 @@
   align-items: center;
   justify-content: center;
 }
+
+.Home #LoadingError {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
