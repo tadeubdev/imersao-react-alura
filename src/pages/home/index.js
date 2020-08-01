@@ -21,7 +21,7 @@ function Home() {
   }, []);
 
   return (
-    <PageDefault className="Home" noPadding>
+    <PageDefault noPadding>
 
       {isLoading && (
         <Loading />
